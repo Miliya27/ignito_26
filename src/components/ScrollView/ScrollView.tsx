@@ -20,7 +20,7 @@ export function ScrollView({ items, activeCategory, onItemClick, isFrozen }: Scr
 
   const filteredItems = activeCategory === 'ALL'
     ? items
-    : items.filter(item => item.category === activeCategory);
+    : items.filter(item => item.category.toUpperCase() === activeCategory.toUpperCase());
 
   useEffect(() => {
     if (!trackRef.current) return;

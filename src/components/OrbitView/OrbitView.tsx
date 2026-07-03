@@ -180,7 +180,7 @@ export function OrbitView({ items, activeCategory, onItemClick, isFrozen }: Orbi
   useEffect(() => {
     cardObjectsRef.current.forEach((obj, i) => {
       const item = items[i];
-      const isVisible = activeCategory === 'ALL' || item?.category === activeCategory;
+      const isVisible = activeCategory === 'ALL' || item?.category?.toUpperCase() === activeCategory.toUpperCase();
       const card = obj.element as HTMLDivElement;
 
       if (isVisible) {
