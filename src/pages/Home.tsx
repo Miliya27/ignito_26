@@ -46,7 +46,7 @@ export function Home() {
         <div className="max-w-7xl mx-auto px-6 py-8 sm:py-12 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <div className="font-space text-sm sm:text-base text-star-warm/80 leading-relaxed">
             <p className="mb-3">
-              IGNITO is Excel MEC's annual flagship tech fest — a convergence of innovation, competition, and creativity. Now in its 12th edition, IGNITO 2025 brings together students, professionals, and tech enthusiasts for three days of workshops, hackathons, competitions, and talks.
+              IGNITO is Excel MEC's annual flagship tech fest — a convergence of innovation, competition, and creativity. Now in its 12th edition, IGNITO 2026 brings together students, professionals, and tech enthusiasts for three days of workshops, hackathons, competitions, and talks.
             </p>
             <p className="text-gold-pale/60">
               From AI enthusiasts to space engineers, from competitive coders to game developers — there's a mission for everyone.
