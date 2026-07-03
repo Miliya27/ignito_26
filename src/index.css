@@ -41,13 +41,11 @@ body::after {
   content: '';
   position: fixed;
   inset: 0;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0, 0, 0, 0.03) 2px,
-    rgba(0, 0, 0, 0.03) 4px
-  );
+  background: repeating-linear-gradient(0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.03) 2px,
+      rgba(0, 0, 0, 0.03) 4px);
   pointer-events: none;
   z-index: 9999;
 }
@@ -57,7 +55,8 @@ body::after {
   position: relative;
 }
 
-a, button {
+a,
+button {
   cursor: none;
 }
 
@@ -110,7 +109,7 @@ a, button {
   .border-gold-gradient {
     border: 1px solid transparent;
     background: linear-gradient(var(--deep), var(--deep)) padding-box,
-                linear-gradient(135deg, var(--gold-dim), var(--gold), var(--gold-dim)) border-box;
+      linear-gradient(135deg, var(--gold-dim), var(--gold), var(--gold-dim)) border-box;
   }
 }
 
@@ -149,6 +148,7 @@ a, button {
     transform: translateY(0);
     opacity: 1;
   }
+
   100% {
     transform: translateY(100vh);
     opacity: 0;
@@ -159,18 +159,23 @@ a, button {
   0% {
     opacity: 0;
   }
+
   50% {
     opacity: 1;
   }
+
   100% {
     opacity: 0;
   }
 }
 
 @keyframes pulse-glow {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 0 20px rgba(201, 168, 76, 0.3);
   }
+
   50% {
     box-shadow: 0 0 40px rgba(201, 168, 76, 0.6);
   }
@@ -188,6 +193,7 @@ a, button {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -198,6 +204,7 @@ a, button {
     transform: translateY(100%);
     opacity: 0;
   }
+
   to {
     transform: translateY(0);
     opacity: 1;
@@ -243,7 +250,8 @@ a, button {
   z-index: 2;
 }
 
-.orbit-card, .scroll-card {
+.orbit-card,
+.scroll-card {
   width: 280px;
   height: 360px;
   background: rgba(8, 7, 0, 0.95);
@@ -255,11 +263,9 @@ a, button {
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  clip-path: polygon(
-    0 0, calc(100% - 16px) 0,
-    100% 16px, 100% 100%,
-    16px 100%, 0 calc(100% - 16px)
-  );
+  clip-path: polygon(0 0, calc(100% - 16px) 0,
+      100% 16px, 100% 100%,
+      16px 100%, 0 calc(100% - 16px));
   transition: border-color 0.3s, box-shadow 0.3s, opacity 0.4s ease;
 }
 
@@ -269,7 +275,8 @@ a, button {
   flex-shrink: 0;
 }
 
-.orbit-card:hover, .scroll-card:hover {
+.orbit-card:hover,
+.scroll-card:hover {
   border-color: rgba(201, 168, 76, 0.65);
   box-shadow:
     0 0 30px rgba(201, 168, 76, 0.12),
@@ -280,11 +287,9 @@ a, button {
 .card-glow-border {
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-    circle at var(--gx, 50%) var(--gy, 50%),
-    rgba(201, 168, 76, 0.15) 0%,
-    transparent 60%
-  );
+  background: radial-gradient(circle at var(--gx, 50%) var(--gy, 50%),
+      rgba(201, 168, 76, 0.15) 0%,
+      transparent 60%);
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.3s;
@@ -656,10 +661,8 @@ a, button {
   padding: 1rem;
   border: none;
   cursor: pointer;
-  clip-path: polygon(
-    0 0, calc(100% - 10px) 0, 100% 10px,
-    100% 100%, 10px 100%, 0 calc(100% - 10px)
-  );
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px,
+      100% 100%, 10px 100%, 0 calc(100% - 10px));
   transition: all 0.3s;
 }
 
@@ -706,11 +709,15 @@ a, button {
   flex: 1;
   position: relative;
   overflow: hidden;
+  perspective: 1200px;
+  perspective-origin: 50% 40%;
 }
 
 /* Mobile Adjustments */
 @media (max-width: 768px) {
+
   .orbit-view-container,
+  .css-carousel-container,
   .view-toggle-button {
     display: none !important;
   }

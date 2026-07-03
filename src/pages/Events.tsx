@@ -56,7 +56,7 @@ export function Events() {
         <header className="page-header">
           <h1 className="page-title">EVENTS</h1>
           <p className="page-subtitle">
-            Drag the orbit · Click an event · Scroll to list
+            Drag to spin · Click an event · Scroll to list
           </p>
         </header>
 

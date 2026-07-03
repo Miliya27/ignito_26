@@ -56,7 +56,7 @@ export function Competitions() {
         <header className="page-header">
           <h1 className="page-title">COMPETE</h1>
           <p className="page-subtitle">
-            Choose your mission · Drag the orbit · Click to enter
+            Choose your mission · Drag to spin · Click to enter
           </p>
         </header>
 
