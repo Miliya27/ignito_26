@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState, ReactNode } from 'react';
 import { NavLink } from 'react-router-dom';
+import { Flashlight, Sun } from 'lucide-react';
+
+type RevealMode = 'torch' | 'lit';
 
 interface TorchRevealProps {
   children: ReactNode;
@@ -10,6 +13,7 @@ export function TorchReveal({ children }: TorchRevealProps) {
   const glowRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
+  const [mode, setMode] = useState<RevealMode>('torch');
   const [hasInteracted, setHasInteracted] = useState(false);
   const [showHint, setShowHint] = useState(false);
   const [isOverTitle, setIsOverTitle] = useState(false);
@@ -21,18 +25,30 @@ export function TorchReveal({ children }: TorchRevealProps) {
   const radiusRef = useRef(0);
 
   const baseRadius = 180;
+  const isTorch = mode === 'torch';
 
   useEffect(() => {
     const showHintTimeout = setTimeout(() => {
-      if (!hasInteracted) {
+      if (!hasInteracted && isTorch) {
         setShowHint(true);
       }
     }, 2000);
 
     return () => clearTimeout(showHintTimeout);
-  }, [hasInteracted]);
+  }, [hasInteracted, isTorch]);
 
   useEffect(() => {
+    if (!isTorch) {
+      setShowHint(false);
+      setHasInteracted(false);
+      if (maskRef.current) maskRef.current.style.opacity = '0';
+      if (glowRef.current) glowRef.current.style.opacity = '0';
+      return;
+    }
+
+    if (maskRef.current) maskRef.current.style.opacity = '1';
+    if (glowRef.current) glowRef.current.style.opacity = '1';
+
     let lastTime = performance.now();
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -123,7 +139,7 @@ export function TorchReveal({ children }: TorchRevealProps) {
       window.removeEventListener('mouseleave', handleMouseLeave);
       window.removeEventListener('resize', handleResize);
     };
-  }, [hasInteracted, isOverTitle]);
+  }, [hasInteracted, isOverTitle, isTorch]);
 
   return (
     <div ref={containerRef} className="relative min-h-screen overflow-hidden">
@@ -131,9 +147,9 @@ export function TorchReveal({ children }: TorchRevealProps) {
 
       <div
         ref={glowRef}
-        className="fixed inset-0 z-[2] pointer-events-none"
+        className="fixed inset-0 z-[2] pointer-events-none transition-opacity duration-500"
         style={{
-          background: !hasInteracted
+          background: !hasInteracted && isTorch
             ? `radial-gradient(circle at 50% 50%, rgba(201,168,76,0.1) 0%, transparent 50%)`
             : undefined,
         }}
@@ -141,13 +157,13 @@ export function TorchReveal({ children }: TorchRevealProps) {
 
       <div
         ref={maskRef}
-        className="fixed inset-0 z-[3] pointer-events-none transition-opacity duration-300"
+        className="fixed inset-0 z-[3] pointer-events-none transition-opacity duration-500"
         style={{
           background: '#000000',
         }}
       />
 
-      {!hasInteracted && (
+      {isTorch && !hasInteracted && (
         <div className="fixed inset-0 z-[4] pointer-events-none flex items-center justify-center">
           <div
             className="w-20 h-20 rounded-full"
@@ -159,11 +175,24 @@ export function TorchReveal({ children }: TorchRevealProps) {
         </div>
       )}
 
-      {showHint && (
+      {isTorch && showHint && (
         <div className="fixed bottom-8 left-1/2 -translate-x-1/2 z-[5] font-mono text-[0.55rem] sm:text-[0.6rem] tracking-[0.3em] text-gold/50 animate-pulse pointer-events-none">
           MOVE YOUR CURSOR TO EXPLORE
         </div>
       )}
+
+      <button
+        onClick={() => setMode(isTorch ? 'lit' : 'torch')}
+        className="reveal-mode-toggle"
+        data-cursor-hover
+        aria-label={isTorch ? 'Switch to lit mode' : 'Switch to torch mode'}
+        title={isTorch ? 'Reveal all (lit mode)' : 'Torch mode'}
+      >
+        {isTorch ? <Sun size={16} /> : <Flashlight size={16} />}
+        <span className="reveal-mode-label">
+          {isTorch ? 'LIT' : 'TORCH'}
+        </span>
+      </button>
     </div>
   );
 }
