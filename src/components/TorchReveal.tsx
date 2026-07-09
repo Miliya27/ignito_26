@@ -188,9 +188,10 @@ export function TorchReveal({ children }: TorchRevealProps) {
         aria-label={isTorch ? 'Switch to lit mode' : 'Switch to torch mode'}
         title={isTorch ? 'Reveal all (lit mode)' : 'Torch mode'}
       >
+        <span className="reveal-mode-glow" />
         {isTorch ? <Sun size={16} /> : <Flashlight size={16} />}
         <span className="reveal-mode-label">
-          {isTorch ? 'LIT' : 'TORCH'}
+          {isTorch ? 'LIT MODE' : 'TORCH MODE'}
         </span>
       </button>
     </div>
